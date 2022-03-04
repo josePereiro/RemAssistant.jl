@@ -1,16 +1,16 @@
 name = "RemAssistant"
 uuid = "5c6ed6fa-ca7d-46d5-93ed-bd31318268f5"
 authors = ["josePereiro <jose.pereiro.lab@gmail.com> and contributors"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
-ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
-BibTeX = "7b0aa2c9-049f-5cec-894a-2b6b781bb25e"
-InteractiveUtils = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
-Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
+InteractiveUtils = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 StringRepFilter = "bfe2832f-5600-46d7-a449-140889a58637"
+BibTeX = "7b0aa2c9-049f-5cec-894a-2b6b781bb25e"
 TOML = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
+ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
 
 [compat]
 julia = "1.6"
