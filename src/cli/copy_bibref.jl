@@ -19,7 +19,7 @@ function copy_bibref(argv=ARGS)
 
     # create rem
     rem = """
-    $(bibkey) ##Document
+    $(bibkey)##Document ##ReadReport
         Meta
             $(ref.title) ##title
             $(ref.authors) ##authors 

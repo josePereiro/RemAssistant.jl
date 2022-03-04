@@ -53,6 +53,24 @@ function _push_csv!(col, str::AbstractString, strs::AbstractString...)
 end
 
 ## ----------------------------------------------------------------------------
+function unzip(file, exdir="")
+    fileFullPath = isabspath(file) ?  file : joinpath(pwd(),file)
+    basePath = dirname(fileFullPath)
+    outPath = (exdir == "" ? basePath : (isabspath(exdir) ? exdir : joinpath(pwd(),exdir)))
+    isdir(outPath) ? "" : mkdir(outPath)
+    zarchive = ZipFile.Reader(fileFullPath)
+    for f in zarchive.files
+        fullFilePath = joinpath(outPath,f.name)
+        if (endswith(f.name,"/") || endswith(f.name,"\\"))
+            mkdir(fullFilePath)
+        else
+            write(fullFilePath, read(f))
+        end
+    end
+    close(zarchive)
+end
+
+## ----------------------------------------------------------------------------
 function _doi_to_url(doi::AbstractString)
     if startswith(doi, "http")
         return doi 

@@ -1,5 +1,4 @@
 ## ----------------------------------------------------------------------------
-# Sync and Load
 
 const _BIB_PATHS_CONFIG_KEY = "bibs"
 
@@ -53,7 +52,7 @@ function _format_BOOKBIB!(_BOOKBIB)
     end
 end
 
-function bibrefs(bibs::Vector{<:AbstractString})
+function _bibrefs(bibs::Vector{<:AbstractString})
     
     _BOOKBIB = Dict{String, Any}()
     for path in bibs
@@ -70,29 +69,5 @@ function bibrefs(bibs::Vector{<:AbstractString})
     end
     refs
 end
-bibrefs(bib::AbstractString) = bibrefs([bib])
-bibrefs() = bibrefs(bibtex_paths())
-
-## ----------------------------------------------------------------------------
-# CLI
-## ---------------------------------------------------------
-
-## ----------------------------------------------------------------------------
-# # find
-
-# function _findall_bookbib(bookdir::AbstractString, qp, qps...) 
-#     vec = references(bookbib(bookdir))
-#     findall_match(vec, qp, qps...)
-# end
-
-# function _findfirst_bookbib(bookdir::AbstractString, qp, qps...) 
-#     vec = references(bookbib(bookdir))
-#     ret = findfirst_match(vec, qp, qps...)
-#     isnothing(ret) ? ret : last(ret)
-# end
-
-# function _filter_bookbib(bookdir::AbstractString, qp, qps...) 
-#     vec = references(bookbib(bookdir))
-#     filter_match(vec, qp, qps...)
-# end
+_bibrefs(bib::AbstractString) = _bibrefs([bib])
 
