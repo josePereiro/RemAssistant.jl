@@ -51,6 +51,16 @@ version = "2.2.2"
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
+[[deps.Reexport]]
+git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
+uuid = "189a3867-3050-52da-a836-e630ba90ab69"
+version = "1.2.2"
+
+[[deps.StringRepFilter]]
+git-tree-sha1 = "7b45972c9a3033fdf1b59a80fb089609e767932e"
+uuid = "bfe2832f-5600-46d7-a449-140889a58637"
+version = "0.2.0"
+
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
