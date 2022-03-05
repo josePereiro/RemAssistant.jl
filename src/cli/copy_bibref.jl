@@ -19,16 +19,15 @@ function copy_bibref(argv=ARGS)
 
     # create rem
     rem = """
-    $(bibkey)##Document ##ReadReport
+    $(bibkey) $(join(remtag(ref.keywords), " ")) #[[Document]] #[[ReadReport]] #[[Header]]
         Meta
-            $(ref.title) ##title
-            $(ref.authors) ##authors 
-            $(ref.year) ##issued
-            $(ref.doi) ##doi
-            $(ref.keywords) ##keywords
+            $(ref.title) #[[title]]
+            $(ref.authors) #[[authors]]
+            $(ref.year) #[[issued]]
+            $(ref.doi) #[[doi]]
 
         Abstract
-            $(ref.abstract) ##abstract
+            $(ref.abstract) #[[abstract]]
 
     """
     println("Rem at clipboard")
