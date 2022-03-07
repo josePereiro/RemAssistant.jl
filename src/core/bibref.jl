@@ -63,7 +63,7 @@ function _bibrefs(bibs::Vector{<:AbstractString})
     _format_BOOKBIB!(_BOOKBIB)
 
     # return 
-    refs = Dict{String, Ref}()
+    refs = OrderedDict{String, Ref}()
     for (bibkey, dict) in _BOOKBIB
         refs[bibkey] = _bookbib_to_Ref(dict)
     end
@@ -71,3 +71,9 @@ function _bibrefs(bibs::Vector{<:AbstractString})
 end
 _bibrefs(bib::AbstractString) = _bibrefs([bib])
 
+function _getfiles(ref::Ref)
+    files = get(ref, "file", "")
+    isempty(files) && return ""
+    files = split(files, ";"; keepempty = false)
+    files
+end

@@ -1,4 +1,7 @@
-function filter_bibref(argv=ARGS)
+function filter_bibref_cli(argv=ARGS)
+
+    # os
+    _run_cli_os()
 
     # read ARGS
     argset = ArgParse.ArgParseSettings()

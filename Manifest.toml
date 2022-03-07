@@ -50,6 +50,11 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
+[[deps.OrderedCollections]]
+git-tree-sha1 = "85f8e6578bf1f9ee0d11e7bb1b1456435479d47c"
+uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
+version = "1.4.1"
+
 [[deps.Parsers]]
 deps = ["Dates"]
 git-tree-sha1 = "13468f237353112a01b2d6b32f3d0f80219944aa"

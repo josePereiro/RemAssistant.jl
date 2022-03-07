@@ -42,3 +42,38 @@ function _update_bk_registry!(gl::GitLink, kb::String)
     _get_bk_registry(gl)
 end
 
+## ----------------------------------------------------------------------------
+function _update_remote_backup(repodir, remote_url; loglevel = :verbose)
+
+    ## gitlink
+    gl = GitLink(repodir, remote_url)
+
+    ## copy/unzip local backup
+    kb = _knowledgebase()
+    newest = _resolve_newest_local_bk!(kb)
+
+    if isempty(newest) 
+        loglevel == :verbose && @info("No local backup detected!!!")
+        return nothing
+    end
+
+    # check registered
+    registered = _get_bk_registry(gl)
+    if (basename(newest) in basename.(registered))
+        loglevel == :verbose && @info("Nothing to update!!!", newest = basename(newest))
+        return nothing
+    end
+
+    ## update remote backup
+    instantiate(gl; verbose = false)
+    ok_flag = GitLinks.writewdir(gl) do wdir
+        unzip(newest, wdir)
+        _update_bk_registry!(gl, kb)
+    end
+    
+    if (loglevel == :verbose || loglevel == :upload) && 
+        ok_flag ? 
+            @info("Backup uploaded!!!", newest = basename(newest)) :
+            @warn("Backup updating failed!!!", newest = basename(newest))
+    end
+end

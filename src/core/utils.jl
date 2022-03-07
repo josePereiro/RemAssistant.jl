@@ -53,10 +53,34 @@ function _push_csv!(col, str::AbstractString, strs::AbstractString...)
 end
 
 ## ----------------------------------------------------------------------------
-function unzip(file, exdir="")
-    fileFullPath = isabspath(file) ?  file : joinpath(pwd(),file)
+# zip
+# function zip(srcfile, destfile = string(srcfile, ".zip"))
+#     zdir = ZipFile.Writer(srcfile) 
+#     for (root, dirs, files) in walkdir(destfile)
+#         for file in files
+#             filepath = joinpath(root, file)
+#             f = open(filepath, "r")
+#             content = read(f, String)
+#             close(f)
+#             zf = ZipFile.addfile(zdir, basename(filepath));
+#             write(zf, content)
+#         end
+#     end
+#     close(zdir)
+# end
+
+function zip(srcfile, destfile = string(srcfile, ".tar.gz"))
+    # p = run(`zip -r $(destfile) $(srcfile)`; wait = false)
+    p = run(`tar -zcvf $(destfile) $(srcfile)`; wait = false)
+    wait(p)
+    return destfile
+end
+
+
+function unzip(srcfile, destfile = replace(srcfile, r".zip$" => ""))
+    fileFullPath = isabspath(srcfile) ?  srcfile : joinpath(pwd(),srcfile)
     basePath = dirname(fileFullPath)
-    outPath = (exdir == "" ? basePath : (isabspath(exdir) ? exdir : joinpath(pwd(),exdir)))
+    outPath = (destfile == "" ? basePath : (isabspath(destfile) ? destfile : joinpath(pwd(),destfile)))
     isdir(outPath) ? "" : mkdir(outPath)
     zarchive = ZipFile.Reader(fileFullPath)
     for f in zarchive.files
@@ -70,6 +94,21 @@ function unzip(file, exdir="")
     close(zarchive)
 end
 
+
+## ----------------------------------------------------------------------------
+function _dirsize(dir)
+    size = 0
+    for (root, dirs, files) in walkdir(dir)
+        for file in files
+            filepath = joinpath(root, file)
+            size += filesize(filepath)    
+        end
+    end
+    return size
+end
+
+_filesize(path) = isdir(path) ? _dirsize(path) : filesize(path)
+
 ## ----------------------------------------------------------------------------
 function _doi_to_url(doi::AbstractString)
     if startswith(doi, "http")
@@ -81,3 +120,13 @@ function _doi_to_url(doi::AbstractString)
     end
     return ""
 end
+
+function camel_alphanumeric(str)
+    strs = split(str, r"[^a-zA-Z0-9]"; keepempty = false)
+    join(uppercasefirst.(strs), " ")
+end
+
+function _if_nonempty(f::Function, str, dflt = "")
+    isempty(str) ? dflt : f(str)
+end
+_if_nonempty(str, val, dflt = "") = _if_nonempty((x) -> val, str, dflt)

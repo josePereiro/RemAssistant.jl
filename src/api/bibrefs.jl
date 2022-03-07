@@ -1,0 +1,1 @@
+bibrefs() = _bibrefs(bibtex_paths())

@@ -50,3 +50,7 @@ function Base.show(io::IO, r::Ref)
     end
 end
 
+## ------------------------------------------------------------------
+# Dict API
+Base.getindex(r::Ref, keys...) = getindex(get_refdict(r), keys...)
+Base.get(r::Ref, key, default) = get(get_refdict(r), key, default)
