@@ -1,20 +1,20 @@
 name = "RemAssistant"
 uuid = "5c6ed6fa-ca7d-46d5-93ed-bd31318268f5"
 authors = ["josePereiro <jose.pereiro.lab@gmail.com> and contributors"]
-version = "0.3.0"
+version = "0.3.1"
 
 [deps]
-ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
-BibTeX = "7b0aa2c9-049f-5cec-894a-2b6b781bb25e"
-Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
 GitLinks = "e5655290-0136-40fd-b997-9e22755203bc"
-InteractiveUtils = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
-JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
-OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
-Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 StringRepFilter = "bfe2832f-5600-46d7-a449-140889a58637"
-TOML = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
+BibTeX = "7b0aa2c9-049f-5cec-894a-2b6b781bb25e"
 ZipFile = "a5390f91-8eb1-5f08-bee0-b1d1ffed6cea"
+OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+InteractiveUtils = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
+TOML = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
+ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
 
 [compat]
 julia = "1.6"
