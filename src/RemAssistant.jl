@@ -12,6 +12,7 @@ import ZipFile
 
 using OrderedCollections
 using GitLinks
+using Dates
 
 using Reexport
 @reexport using StringRepFilter
