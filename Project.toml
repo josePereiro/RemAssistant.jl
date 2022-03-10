@@ -1,7 +1,7 @@
 name = "RemAssistant"
 uuid = "5c6ed6fa-ca7d-46d5-93ed-bd31318268f5"
 authors = ["josePereiro <jose.pereiro.lab@gmail.com> and contributors"]
-version = "0.3.1"
+version = "0.3.2"
 
 [deps]
 GitLinks = "e5655290-0136-40fd-b997-9e22755203bc"
