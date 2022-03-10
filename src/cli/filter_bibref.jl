@@ -31,6 +31,7 @@ function filter_bibref_cli(argv=ARGS)
 
     @info(string("Found ", length(found), " ref(s)"))
     for ref in found
+        println("-"^30)
         println(ref)
     end
 

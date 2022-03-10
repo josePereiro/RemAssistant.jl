@@ -130,3 +130,16 @@ function _if_nonempty(f::Function, str, dflt = "")
     isempty(str) ? dflt : f(str)
 end
 _if_nonempty(str, val, dflt = "") = _if_nonempty((x) -> val, str, dflt)
+
+## ----------------------------------------------------------------------------
+function _hash_file(file::AbstractString)
+    h = hash("")
+    !isfile(file) && return h
+
+    open(file) do io
+        for byte in read(io)
+            h = hash(byte, h)
+        end
+    end
+    return h
+end

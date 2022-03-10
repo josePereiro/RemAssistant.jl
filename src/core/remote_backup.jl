@@ -37,6 +37,7 @@ function _update_bk_registry!(gl::GitLink, kb::String)
     for file in readdir(lbk_dir)
         !endswith(file, ".zip") && continue
         _addto_bk_registry!(gl, file)
+        _addto_bk_registry!(gl, _to_ascii(file))
     end
 
     _get_bk_registry(gl)
@@ -70,7 +71,19 @@ function _tag_backup!(gl::GitLink)
 end
 
 ## ----------------------------------------------------------------------------
-function _update_remote_backup(bkdir, remote_url; loglevel = :verbose)
+_to_ascii(str) = replace(str, !isascii => "")
+
+function _is_registered(newest, registered)
+    findfirst(
+        isequal(_to_ascii(basename(newest))), 
+        _to_ascii.(basename.(registered))
+    ) !== nothing
+end
+
+## ----------------------------------------------------------------------------
+function _update_remote_backup(bkdir, remote_url; 
+        force = false, loglevel = :verbose
+    )
 
     ## gitlink
     gl = GitLink(bkdir, remote_url)
@@ -87,8 +100,9 @@ function _update_remote_backup(bkdir, remote_url; loglevel = :verbose)
 
     # check registered
     registered = _get_bk_registry(gl)
-    if (basename(newest) in basename.(registered))
-        loglevel == :verbose && @info("Nothing to update!!!", newest = basename(newest))
+    is_registered = _is_registered(newest, registered)
+    if !force && is_registered
+        loglevel == :verbose && @info("Nothing to update!!!", newest = basename(newest), force, is_registered)
         return nothing
     end
 
@@ -106,7 +120,7 @@ function _update_remote_backup(bkdir, remote_url; loglevel = :verbose)
     ## log
     if (loglevel == :verbose || loglevel == :upload)
         ok_flag ? 
-            @info("Backup uploaded!!!", newest = basename(newest)) :
-            @warn("Backup updating failed!!!", newest = basename(newest))
+            @info("Backup uploaded!!!", newest = basename(newest), force, is_registered) :
+            @warn("Backup updating failed!!!", newest = basename(newest), force, is_registered)
     end
 end

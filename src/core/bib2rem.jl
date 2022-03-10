@@ -1,4 +1,4 @@
-function _bibtorem(bibkey::AbstractString)
+function _bibtorem(bibkey::AbstractString; add_pdfs = false)
     
     # get ref
     ref = get(bibrefs(), bibkey) do
@@ -27,6 +27,7 @@ function _bibtorem(bibkey::AbstractString)
                     join(files, "\n\t\t\t")
                 )
             )
+            pdfs = add_pdfs ? pdfs : ""
 
     
     return join(

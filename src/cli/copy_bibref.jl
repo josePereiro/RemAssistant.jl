@@ -10,12 +10,16 @@ function copy_bibref_cli(argv=ARGS)
             help = "The entry identifier"
             arg_type = String
             required = true
+        "--files", "-f"
+            help = "Signal to include source files"
+            action = :store_true
     end
 
     parsed_args = ArgParse.parse_args(argv, argset)
     bibkey = parsed_args["bibkey"]
+    add_pdfs = parsed_args["files"]
 
-    rem = _bibtorem(bibkey)
+    rem = _bibtorem(bibkey; add_pdfs)
 
     println("Rem at clipboard")
     println(rem)

@@ -35,6 +35,7 @@ include("api/update_remote_backup.jl")
 include("cli/cli_os.jl")
 include("cli/copy_bibref.jl")
 include("cli/filter_bibref.jl")
+include("cli/update_remote_backup.jl")
 
 export bibrefs
 export filter_bibref, copy_bibref
